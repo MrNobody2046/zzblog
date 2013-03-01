@@ -1,0 +1,173 @@
+*   {
+    margin: 0;padding:0;
+    }
+    
+body {
+	background: #CCCCFF url("/medias/dark-tile.jpg");
+    }
+
+ol {list-style: none;}
+
+img {
+    border: 0 none;
+    display: block;
+    width: 1000px;
+
+}
+
+#header {
+	font: bolder normal 30px "Comic Sans MS", cursive;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1002px;
+	height: 65px;
+	position: relative;
+	border-style: none;
+	border-color: #666;
+	top: 10px;
+	color: #FFF;
+	text-transform: none;
+	padding: 0px;
+    }
+
+#slider {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+	height: 618px;
+	overflow: hidden;
+	position: relative;
+	border-style: groove;
+	border-color: #CCF;
+	top: 40px;
+    }
+#slider .player {
+	/*width: 2450px;
+	height: 850px;*/
+	position: absolute;
+	top: 0px;
+	left: auto;
+	width: 4000px;
+	height: 618px;
+    }
+#slider .player li {
+	float: left;
+    }
+#slider .btns {
+	position: absolute;
+	right: 10px;
+	bottom: 5px;
+	height: 30px;
+    }
+#slider .btns li {
+	font: 13px Tahoma, Arial, ËÎÌו, sans-serif;
+	float: left;
+	margin: 0 3px;
+	border: 1px solid 9ff;
+	background-color: #FFFFFF;
+	color: #000000;
+	opacity: 1;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	line-height: 19px;
+	text-align: center;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px 0px 10px 0px;
+    }
+
+#enter {
+	margin-left: auto;
+	margin-right: auto;
+	width: 950px;
+	overflow: hidden;
+	position: relative;
+	top: -500.px;
+	height: 120px;
+	top: -100px;
+    }
+#enter button{
+	font: bolder normal 28px Georgia, "Times New Roman", Times, serif;
+	color: #0000FF;
+	background: #CCCCCC;
+	border-style: inset;
+	border-color: #CCCCCC;
+    }
+#enter button:hover {
+	color: #FFF;
+	background: #5cc url(none);
+	font-weight: bolder;
+	}
+#enter .A button{
+	opacity: 0.5;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	border-radius: 50px 50px 1px 50px;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	line-height: normal;
+	list-style: none;
+    }
+#enter .B button{
+	float: left;
+	margin: 0;
+	opacity: 0.5;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	border-radius: 50px 50px 50px 1px;
+	position: absolute;
+	top: 5px;
+	left: 58px;
+	list-style: none;
+    }
+#enter .C button{
+	float: left;
+	margin: 0;
+	opacity: 0.5;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	border-radius: 50px 1px 50px 50px;
+	left: 5px;
+	top: 58px;
+	position: absolute;
+	list-style: none;
+    }
+#enter .D button{
+	float: left;
+	margin: 0;
+	opacity: 0.5;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	border-radius: 1px 50px 50px 50px;
+	position: absolute;
+	left: 58px;
+	top: 58px;
+	list-style: none;
+    }
+#slider .btns li.active {
+	background: #9ff;
+	color: #FFF;
+	font-weight: bold;
+	opacity: 1;
+}
+
+#footer {
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	height: 50px;
+	width: 930px;
+	font: 19px Tahoma, Geneva, sans-serif;
+	color: #CCC;
+	top: 55px;
+}

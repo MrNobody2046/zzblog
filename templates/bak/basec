@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.2/build/reset-fonts-grids/reset-fonts-grids.css">
+  <link rel="stylesheet" type="text/css" href="/site_media/css/mystyle.css">
+  <title>{% block title %}Sofeng's Blog {{ version }}{% endblock %}</title>
+</head>
+
+<body>
+  <div id="doc" class="yui-t4">
+
+    <div id="hd">
+      <h1>
+        <img align="center" src="/site_media/image/crane.jpg">
+        {% block header1 %}Sofeng's Blog {{ version }}{% endblock %}
+      </h1>
+      <h2>{% block header2 %}{% endblock %}</h2>
+    </div>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          {% block main %}{% endblock %}
+        </div>
+      </div>
+    
+      <div class="yui-b" id="sidebar">
+        {% block sidebar %}
+        <h4>ABOUT</h4>
+        <p>This is my new blog created using <a href="http://www.djangoproject.com">Django</a>,
+          a <a href="http://www.python.org">Python</a> web framework. This site is under 
+          construction. My current blog is located at: 
+          <a href="http://iwiwdsmi.blogspot.com">http://iwiwdsmi.blogspot.com</a>.
+        </p>
+        <br>
+        <h4>TAGS</h4>
+        {% for line in tag_counts %}
+            <a href="/blog/tag/{{ line.tag }}/">{{ line.tag }}</a> ({{ line.count }})<br>
+        {% endfor %}
+        <br>
+        <h4>ARCHIVE</h4>
+        {% for line in archive_counts %}
+          {% if line.isyear %}
+            {% if not forloop.first %}
+              <br>
+            {% endif %}
+              <a href="/blog/{{ line.year }}/">{{ line.year }}</a> ({{ line.count }})<br>
+          {% else %}
+                <a href="/blog/{{ line.yearmonth }}/">{{ line.monthname }}</a> ({{ line.count }})<br>
+          {% endif %}
+        {% endfor %}
+        <br>
+        {% endblock %}
+      </div>
+    </div>
+
+    <div id="ft">
+      Created with <a href="http://www.djangoproject.com/">Django</a>.<br>
+      Hosted by <a href="http://www.webfaction.com/">Webfaction</a>.
+    </div>
+  </div>
+
+</body>
+</html>

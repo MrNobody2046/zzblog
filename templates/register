@@ -1,0 +1,26 @@
+{% extends "base" %}
+
+{% block title %}
+  Pyz space Create an account{{ version }}: {{ post.title }}
+{% endblock %}
+
+{% block header1 %}
+  <a href="/blog/">     &&&&&&&&&&&& {{ version }}</a>
+{% endblock %}
+
+{# to fix IE #}
+{% block header2 %} {% endblock %}
+
+{% block main %}
+
+
+  <h1>Create an account</h1>
+
+  <form action="" method="post">
+      {{ form.as_p }}
+      <input type="submit" value="Create the account">
+  </form>
+
+
+    
+{% endblock %}

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" rel="stylesheet" href="/static/layout.css">
+<title>{% block title %}Pyz {{ version }}{% endblock %}</title>
+</head>
+<body>
+
+<div id="header">
+<a class="Index" href="/blog/">Index</a>
+{% if request.user.is_authenticated %}
+({{user.username }})<a class="Logout" href="/blog/logout/">Logout</a>
+
+{% else %}
+<a class="Login" href="/blog/login/">Login</a>
+{% endif %}
+<a class="AboutMe" href="">AboutMe</a>
+
+<a class="Regist" href="/blog/register/">Regist</a>
+
+
+
+<img align="center" src="">
+<h1 align="center"><FONT color=#fff><B> Pyz space</B></FONT> </h1>
+</div>
+<div id="sidebarLeft">
+        {% block sidebar %}
+        <form action="/blog/search/" method="post" >
+        <input type="text" name="keyword" size=12 >
+        <input type="submit" value="Search in Posts"size=12 >
+        </form>
+        <h4>About Me</h4>
+        <p>{{ user.username }}introduction
+        </p>
+        <br>
+        <h4>TAGS</h4>
+        {% for line in tag_counts %}
+            <a href="/blog/tag/{{ line.tag }}/">{{ line.tag }}</a> ({{ line.count }})<br>
+        {% endfor %}
+        <br>
+        <h4>ARCHIVE</h4>
+        {% for line in archive_counts %}
+          {% if line.isyear %}
+            {% if not forloop.first %}
+              <br>
+            {% endif %}
+              <a href="/blog/{{ line.year }}/">{{ line.year }}</a> ({{ line.count }})<br>
+          {% else %}
+                <a href="/blog/{{ line.yearmonth }}/">{{ line.monthname }}</a> ({{ line.count }})<br>
+          {% endif %}
+        {% endfor %}
+        <br>
+        
+
+        {% endblock %}
+</div>
+<div id="mainRight">
+  {% block main %}{% endblock %}
+</div>
+<div id="footer">
+  Here you are.
+</div> 
+</body>
+</html>

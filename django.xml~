@@ -1,0 +1,20 @@
+<uwsgi>
+  <socket>127.0.0.1:9090</socket>
+  <chdir>/home/zxc/www/pyz/</chdir>
+  <pythonpath>..</pythonpath>
+  <module>uwsgi</module>
+</uwsgi>
+<uwsgi> 
+  <socket>127.0.0.1:9999</socket> 
+  <listen>9999</listen> 
+  <master>true</master> 
+  <pidfile>/usr/local/nginx/uwsgi.pid</pidfile> 
+  <processes>1</processes> 
+  <module>django_wsgi</module>  #这个文件下面要建立
+  <pythonpath>/home/zxc/www/pyz/</pythonpath>   #刚才建立项目的路径
+  <profiler>true</profiler> 
+  <memory-report>true</memory-report> 
+  <enable-threads>true</enable-threads> 
+  <logdate>true</logdate> 
+  <limit-as>1000</limit-as> 
+</uwsgi> 

@@ -1,0 +1,67 @@
+
+{% extends "base" %}
+
+{% block title %}
+  Pyz space {{ version }}: {{ post.title }}
+{% endblock %}
+
+{% block header1 %}
+  <a href="/blog/">  {{ version }}</a>
+{% endblock %}
+
+{# to fix IE #}
+{% block header2 %} {% endblock %}
+
+{% block main %}
+    <div class="post_title">
+    <h3><center>{{ post.title }}</center></h3><br>
+    </div>
+    
+    <div class="post_content" style="white-space:normal;">
+    {{ post.content|safe }}</pre>
+    <hr>
+    </div>
+    
+
+    <div class="post_foot">
+      {% ifnotequal post.date_modified.date post.date_created.date %}
+        Last modified: {{ post.date_modified.date }} 
+      {% else %}
+      Date created: {{ post.date_created.date }}<br>
+      {% endifnotequal %}
+      Tags: 
+      {% for tag in post.get_tag_list %}
+        <a href="/blog/tag/{{ tag }}/">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+      {% endfor %}<br><br>
+    </div>
+    
+
+
+<div class="comment_content">
+   <h3>留言板:</h3>
+  {% for comment in comments %}
+  {% if comment.homepage %}
+      <a href="{{ comment.homepage }}">{{ comment.name }}</a>
+    {% else %}
+      {{ comment.name }}
+    {% endif %}
+    说:<b>"</b>{{ comment.content }}<b>"</b>[{{ comment.date_created.date }}:]
+    <br>
+    {% endfor %}<br><br>
+</div>
+
+
+<div class="comment_form">
+<h3>给我留言</h3>
+<form id="comment_form" action="./comment/" method="POST" onsubmit="javascript:return CheckForm()">
+  <table>
+<tr><th><label for="id_name">昵称:</label></th><td><input type="text" name="name" id="id_name" /></td></tr>
+<tr><th><label for="id_email">邮箱:</label></th><td><input type="text" name="email" id="id_email" /></td></tr>
+<tr><th><label for="id_homepage">主页:</label></th><td><input type="text" name="homepage" id="id_homepage" /></td></tr>
+  </table>
+   <p>内容: <textarea name="content" rows="10" cols="50"></textarea></p>
+  <p><input type="submit" value="Submit" ></p>
+</form>
+</form>
+</div>
+{% endblock %}

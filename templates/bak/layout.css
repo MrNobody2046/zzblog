@@ -1,0 +1,41 @@
+body {
+ margin: Auto;
+ padding: Auto;
+ [font-family: Georgia, Times, "Times New Roman", serif;]
+ color: red;
+ width: 1200px;
+ border-right: 1px solid black;
+}
+#header {
+	background-color: #666;
+	font-size: 18px;
+	letter-spacing: 1.1px;
+	border-bottom-width: 1px;
+	border-top-style: groove;
+	border-right-style: groove;
+	border-bottom-style: groove;
+	border-left-style: groove;
+	border-bottom-color: #333;
+	cursor: auto;
+}
+#sidebarLeft {
+ float: right;
+ width: 120px;
+ margin-left: 10px;
+ padding-top: 1em;
+}
+#mainRight {
+	padding-top: 1em;
+	margin: Auto 1em 0 200px;
+	background-color: #CCC;
+}
+#footer {
+ clear: both;
+ background-color: #ccc;
+ padding-bottom: 1em;
+ border-top: 1px solid #333;
+ padding-left: 200px;
+}
+h2.sidebar {
+  font-size: 120%;
+}

@@ -1,0 +1,12 @@
+import sys 
+import os
+import django.core.handlers.wsgi
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'pyz.settings'
+ 
+
+ 
+application = django.core.handlers.wsgi.WSGIHandler()
+
+
+uwsgi --module='django.core.handlers.wsgi:WSGIHandler()' --env DJANGO_SETTINGS_MODULE=pyz.settings -s :9999 -p 10 -d uws.log --touch-reload=uws.tc &

@@ -1,0 +1,37 @@
+{% extends "base" %}
+
+
+{% block title %}
+  list page! {{ version }}
+  {% if subtitle %}:{% endif %}
+  {{ subtitle }}
+{% endblock %}
+
+{% block header1 %}
+  {% if subtitle %}
+    <a href="/blog/">jj{{ version }}</a>
+  {% else %}
+{{ version }}
+  {% endif %}
+{% endblock %}
+
+{% block header2 %}
+  {{ subtitle }}
+{% endblock %}
+
+{% block main %}
+  {% for post in post_list %}
+    <h3><a href="/blog/{{ post.date_created|date:"Y/m" }}/{{ post.slug }}/">
+        {{ post.title }}</a>
+    </h3>
+
+    <hr>
+    <div class="post_footer">
+      {% ifnotequal post.date_modified.date post.date_created.date %}
+        Last modified: {{ post.date_modified.date }} 
+      {% endifnotequal %}
+      Date created: {{ post.date_created.date }}
+
+    <br>
+  {% endfor %}
+{% endblock %}

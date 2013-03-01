@@ -1,0 +1,42 @@
+{% extends "base" %}
+
+{% block title %}
+  Pyz space {{ version }}: {{ post.title }}
+{% endblock %}
+
+{% block header1 %}
+  <a href="/blog/">     &&&&&&&&&&&& {{ version }}</a>
+{% endblock %}
+
+{# to fix IE #}
+{% block header2 %} {% endblock %}
+
+{% block main %}
+Thanks!
+
+<table>
+  
+  <tr>
+    <td>
+    
+    {% if comment.homepage %}
+      <a href="{{ comment.homepage }}">{{ comment.name }}</a>
+    {% else %}
+      {{ comment.name }}
+    {% endif %}
+    
+    {% if comment.email %}
+    ({{ comment.email }})
+    {% else %}
+    {% endif %}
+    {{comment.obj.title}}
+    leave a comment at {{ comment.date_created.date }}
+    </td>
+  </tr>
+  <tr>
+    <td><h5>Content:</h5>{{ comment.content }}</td>
+  </tr>
+
+</table> 
+    
+{% endblock %}

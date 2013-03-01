@@ -1,0 +1,71 @@
+#-*- coding: utf-8 -*-
+
+from django.http import HttpResponse
+import datetime
+from django.template.loader import get_template
+from django.template import Context
+from books.models import Book
+
+def photos(request):
+    return render_to_response('photos.html',''}
+
+def hello(request):
+    return HttpResponse("Hello world")
+
+def nowtime(request):
+    now_time = datetime.datetime.now()
+    
+    html = "<html><body>It is now %s.</body></html>" %now_time
+    return HttpResponse(html)
+def offsetime(request,offset):
+    try:
+        offset = int(offset)
+    except ValueError:
+        raise Http404()
+    dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
+    t = get_template('temp1')
+    html = t.render(Context({'offset':dt}))
+#    html = "<html><body>In %s hour(s), it will be %s.</body></html>" % (offset, dt)
+    return HttpResponse(html)
+
+from django.shortcuts import render_to_response
+def display_meta(request):
+    values = request.META.items()
+    values.sort()
+    html = []
+    for k, v in values:
+        html.append(render_to_response('meta-temp', {'a': k,'b':v}))
+    return HttpResponse(html)
+
+from django.shortcuts import render_to_response
+from books.models import ContactForm
+
+def oo(request):
+    error = False
+    if 'q' in request.GET:
+        q = request.GET['q']
+        if not q:
+            error = True
+        else:
+            books = Book.objects.filter(title__icontains=q)
+            return render_to_response('search_results.html',
+                {'books': books, 'query': q})
+    return render_to_response('search-temp',
+        {'error': error})
+
+from django import forms
+
+
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+ #           send_mail(cd['subject'],cd['message'],cd.get('email','noreply@example.com`_'),'siteowner@example.com`_'],)
+            return HttpResponseRedirect('/search')
+    else:
+        form = ContactForm(initial={'subject': 'I love your site!'})
+    return render_to_response('contact_form.html', {'form': form})
+

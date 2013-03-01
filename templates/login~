@@ -1,0 +1,26 @@
+{% extends "base" %}
+
+{% block title %}
+  Pyz space {{ version }}: {{ post.title }}
+{% endblock %}
+
+{% block header1 %}
+  <a href="/blog/">     &&&&&&&&&&&& {{ version }}</a>
+{% endblock %}
+
+{# to fix IE #}
+{% block header2 %} {% endblock %}
+
+{% block main %}
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="username">User name:</label>
+    <input type="text" name="username" value="{{username}}" id="username" size=16>
+    <label for="password">Password:</label>
+    <input type="password" name="password" value="{{password}}" id="password"  size=16>
+
+    <input type="submit" value="login" />
+    <input type="hidden" name="next" value="{{ next|escape }}" />
+  </form>
+    
+{% endblock %}

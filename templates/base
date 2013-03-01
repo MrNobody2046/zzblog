@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta property="wb:webmaster" content="acdcf1f9a408393d" /> 
+<title>Pyz'sPace</title>
+<script language="javascript" type="text/javascript" src="/statics/jquery.min.js"></script>
+<script type="text/javascript" src="/statics/tagcloud.js"></script>
+<script type="text/javascript" src="/statics/comment_form.js"></script>
+<script type="text/javascript" src="/statics/loadjscssfile.js"></script>
+<link href="/statics/base.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body onload="HighLight();" >
+
+
+
+    <div id="header">
+    <h1 ><center>&nbsp;&nbsp;Pyz'sPace</center></h1>
+    </div>
+
+    <div id="content">
+        <div class="sidebar">
+            <ul class="nav">
+                <li><center><a href="/">首页|图片</a></center></li>
+                <li><center><a href="/blog">码字|闲话</a></center></li>
+                <li><center><a href="/about">me.self</a></center></li>
+            </ul>         
+            <br>
+           {% block sidebar %}
+           <div class ="introduce">
+           <h3><center>关于小站</center></h3>
+           <p>本站基于Django框架,使用centos6.3+nginx+uwsgi部署。欢迎下载<a href="">源码</a>
+           </p><br>
+  <script type="text/javascript" src="http://ja.revolvermaps.com/r.js"></script><script type="text/javascript">rm_f1st('0','190','true','false','000000','02ns94ae0y2','true','ff0000');</script><noscript><applet codebase="http://ra.revolvermaps.com/j" code="core.RE" width="190" height="190" archive="g.jar"><param name="cabbase" value="g.cab" /><param name="r" value="true" /><param name="n" value="false" /><param name="i" value="02ns94ae0y2" /><param name="m" value="0" /><param name="s" value="190" /><param name="c" value="ff0000" /><param name="v" value="true" /><param name="b" value="000000" /><param name="rfc" value="true" /></applet></noscript> 
+        </div>
+        
+        <div id="tags">
+            <h4><center>Tags</center></h4><br>
+            {% for line in tag_counts %}
+            <a href="/blog/tag/{{ line.tag }}/" count_value="{{line.count}}" title="共有{{line.count}}篇文章"> {{ line.tag }}</a>            <!--({{ line.count }})-->
+            {% endfor %}
+        
+        </div>
+        <br><br><br>
+        <h4><center>Time</center></h4><br>
+        {% for line in archive_counts %}
+        {% if line.isyear %}
+        {% if not forloop.first %}
+        <br>
+        {% endif %}
+        <center><a href="/blog/{{ line.year }}/">{{ line.year }}</a>({{ line.count }})<br></center>
+        {% else %}
+        <center><a href="/blog/{{ line.yearmonth }}/">{{ line.monthname }}</a> ({{ line.count }})<br></center>
+        {% endif %}
+        {% endfor %}
+        <br>
+        <p></p>
+        {% endblock %}
+    </div>
+
+
+<div class="frame">
+    <div class="main">
+    {% block main %}{% endblock %}
+    </div>
+
+<!--   <div class="footer">
+        <strong>本博客内相片如非注明皆为原创，转载需要获得博主书面认可，请电邮<a href="mailto:philorpove@foxmail.com"      >philorpove@foxmail.com </a></strong>
+    </div>
+</div>
+-->
+
+
+
+
+</body>
+</html>

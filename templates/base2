@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+body {
+ margin: Auto;
+ padding: Auto;
+ [font-family: Georgia, Times, "Times New Roman", serif;]
+ color: black;
+ width: 1000px;
+ border-right: 1px solid black;
+}
+#header {
+ background-color: #356;
+ border-bottom: 1px solid #333;
+}
+#sidebarLeft {
+ float: left;
+ width: 120px;
+ margin-left: 10px;
+ padding-top: 1em;
+}
+#mainRight {
+ padding-top: 1em;
+ margin: Auto 1em 0 200px;
+}
+#footer {
+ clear: both;
+ background-color: #ccc;
+ padding-bottom: 1em;
+ border-top: 1px solid #333;
+ padding-left: 200px;
+}
+h2.sidebar {
+  font-size: 120%;
+}
+</style>
+<title>{% block title %}Pyz {{ version }}{% endblock %}</title>
+</head>
+<body>
+
+<div id="header">
+<a class="Index" href="/blog/">Index</a>
+{% if request.user.is_authenticated %}
+({{user.username }})<a class="Logout" href="/blog/logout/">Logout</a>
+
+{% else %}
+<a class="Login" href="/blog/login/">Login</a>
+{% endif %}
+<a class="AboutMe" href="">AboutMe</a>
+
+<a class="Regist" href="/blog/register/">Regist</a>
+
+
+
+<img align="center" src="">
+<h1 align="center"><FONT color=#fff><B> Pyz space</B></FONT> </h1>
+</div>
+<div id="sidebarLeft">
+        {% block sidebar %}
+        {{user.is_authenticated }}
+        <h4>ABOUT</h4>
+        <p>{{ user.username }}introduction
+        </p>
+        <br>
+        <h4>TAGS</h4>
+        {% for line in tag_counts %}
+            <a href="/blog/tag/{{ line.tag }}/">{{ line.tag }}</a> ({{ line.count }})<br>
+        {% endfor %}
+        <br>
+        <h4>ARCHIVE</h4>
+        {% for line in archive_counts %}
+          {% if line.isyear %}
+            {% if not forloop.first %}
+              <br>
+            {% endif %}
+              <a href="/blog/{{ line.year }}/">{{ line.year }}</a> ({{ line.count }})<br>
+          {% else %}
+                <a href="/blog/{{ line.yearmonth }}/">{{ line.monthname }}</a> ({{ line.count }})<br>
+          {% endif %}
+        {% endfor %}
+        <br>
+        
+                <form action="/search/" method="get" >
+        <input type="text" name="q" size=16 >
+        <input type="submit" value="Search" >
+        </form>
+        {% endblock %}
+</div>
+<div id="mainRight">
+  {% block main %}{% endblock %}
+</div>
+<div id="footer">
+  Here you are.
+</div> 
+</body>
+</html>

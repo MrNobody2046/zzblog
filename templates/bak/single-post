@@ -1,0 +1,69 @@
+{% extends "base" %}
+
+{% block title %}
+  Pyz space {{ version }}: {{ post.title }}
+{% endblock %}
+
+{% block header1 %}
+  <a href="/blog/">  {{ version }}</a>
+{% endblock %}
+
+{# to fix IE #}
+{% block header2 %} {% endblock %}
+
+{% block main %}
+    <h3>{{ post.title }}</h3>    
+    {% if post.content_highlighted %}
+    {{ post.content_highlighted|safe }}
+    {% else %}
+    {{ post.content|safe }}
+    {% endif %}
+
+    <hr>
+    <div class="post_footer">
+      {% ifnotequal post.date_modified.date post.date_created.date %}
+       Last Modified: {{ post.date_modified.date }}
+      {% endifnotequal %}
+      Created at: {{ post.date_created.date }} 
+      Tags: 
+      {% for tag in post.get_tag_list %}
+        <a href="/blog/tag/{{ tag }}/">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    </div>
+    <br>
+
+<h4>Comments:</h4>
+
+  {% for comment in comments %}
+
+
+  {% if comment.homepage %}
+      <a href="{{ comment.homepage }}">{{ comment.name }}</a>
+      
+    {% else %}
+      {{ comment.name }}
+    {% endif %}
+    say:<b>"</b>{{ comment.content }}<b>"</b> at [{{ comment.date_created.date }}:]
+    <br>   <br>
+
+    {% endfor %}
+
+
+<h3>Leave your message</h3>
+<form action="./comment/" method="POST">
+  <table>
+  {% if request.user.is_authenticated %}
+  You are loged in."{{user.username }}"
+  {% else %}
+<tr><th><label for="id_name">Name:</label></th><td><input type="text" name="name" id="id_name" /></td></tr>
+<tr><th><label for="id_email">Email:</label></th><td><input type="text" name="email" id="id_email" /></td></tr>
+  {% endif %}
+<tr><th><label for="id_homepage">Homepage:</label></th><td><input type="text" name="homepage" id="id_homepage" /></td></tr>
+  </table>
+   <p>Content: <textarea name="content" rows="10" cols="50"></textarea></p>
+  <p><input type="submit" value="Submit"></p>
+</form> 
+
+    </form>
+    
+{% endblock %}
