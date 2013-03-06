@@ -11,13 +11,19 @@ class BlogAdmin(admin.ModelAdmin):
     ordering = ('-publication_date',)
     fields = ('title', 'authors', 'publisher', 'publication_date')
     filter_horizontal = ('authors',)
-"""
+
 admin.site.register(Publisher)
 admin.site.register(Author,AuthorAdmin)
 admin.site.register(Book,BookAdmin)
-
-
-admin.site.register(Comment)
+"""
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('title', 'content', 'name')
+    list_filter = ('name','title')
+    ordering = ('date_created',)
+    fields = ('title', 'content', 'name', 'obj')
+    filter_horizontal = ('title',)
+  
+admin.site.register(Comment,CommentAdmin)
 admin.site.register(Post)
 
 

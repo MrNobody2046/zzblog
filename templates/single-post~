@@ -1,5 +1,8 @@
 
-{% extends "base" %}
+{% extends "NewBase.html" %}
+
+<script language="javascript" type="text/javascript" src="/statics/jquery.min.js"></script>
+<script type="text/javascript" src="/statics/loadjscssfile.js"></script>
 
 {% block title %}
   Pyz space {{ version }}: {{ post.title }}
@@ -17,7 +20,7 @@
     <h3><center>{{ post.title }}</center></h3><br>
     </div>
     
-    <div class="post_content" style="white-space:normal;">
+    <div class="post_content">
     {{ post.content|safe }}</pre>
     <hr>
     </div>
@@ -39,29 +42,38 @@
 
 <div class="comment_content">
    <h3>留言板:</h3>
+  
+<table class="table table-hover">
+
+              <tbody>
   {% for comment in comments %}
-  {% if comment.homepage %}
-      <a href="{{ comment.homepage }}">{{ comment.name }}</a>
+  <tr>
+                
+    <th>{% if comment.homepage %}<a href="{{ comment.homepage }}">{{ comment.name }}</a>
     {% else %}
       {{ comment.name }}
     {% endif %}
-    说:<b>"</b>{{ comment.content }}<b>"</b>[{{ comment.date_created.date }}:]
-    <br>
-    {% endfor %}<br><br>
-</div>
+    <i class="icon-pencil"></i>:{{ comment.content }}[{{ comment.date_created.date }}:]</th>
+   </tr>
+    {% endfor %}
+              </tbody>
+            </table>
+   
+  
 
 
-<div class="comment_form">
+
+
 <h3>给我留言</h3>
 <form id="comment_form" action="./comment/" method="POST" onsubmit="javascript:return CheckForm()">
   <table>
-<tr><th><label for="id_name">昵称:</label></th><td><input type="text" name="name" id="id_name" /></td></tr>
-<tr><th><label for="id_email">邮箱:</label></th><td><input type="text" name="email" id="id_email" /></td></tr>
-<tr><th><label for="id_homepage">主页:</label></th><td><input type="text" name="homepage" id="id_homepage" /></td></tr>
+<tr><th><label for="id_name">昵称:</label></th><td><input type="text" name="name" id="id_name" placeholder="Type Your nick name…"/></td></tr>
+<tr><th><label for="id_email">邮箱:</label></th><td><input type="text" name="email" id="id_email" placeholder="xxx@gmail.com"/></td></tr>
+<tr><th><label for="id_homepage">主页:</label></th><td><input type="text" name="homepage" id="id_homepage" placeholder="If you have" /></td></tr>
   </table>
-   <p>内容: <textarea name="content" rows="10" cols="50"></textarea></p>
-  <p><input type="submit" value="Submit" ></p>
-</form>
+<textarea name="content" style=“height:200px;width:720px;” rows="9"></textarea>
+  <p><input type="submit" value="写好了！" ></p>
 </form>
 </div>
 {% endblock %}
+

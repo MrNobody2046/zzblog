@@ -1,0 +1,74 @@
+function Player(btns, scrollContent, imgHeight, timeout, hoverClass) {
+/*
+ * btns:按钮，类型是数组
+ * scrollContent:摇滚动的块，一个DOM对象，这里是ol
+ * imgHeight:每一张图片的高度，当然，如果想改成左右滚动，这里传入每一张图片的宽，唯一需要注意的是每一张图片宽高必须相同，图片数量可调整
+ * timeout:切换速度快慢，默认为1.5ms
+ * hoverClass:每一个按钮激活时的类名
+*/
+	hoverClass = hoverClass || 'active';
+	timeout = timeout || 1500;
+	this.btns = btns;
+	this.scrollContent = scrollContent;
+	this.hoverClass = hoverClass;
+	this.timeout = timeout;
+	this.imgHeight = imgHeight;
+
+	var _this = this;
+	for(var i=0; i<btns.length; i++) {
+		this.btns[i].index = i;
+		btns[i].onmouseover = function() {
+			_this.stop();
+			_this.invoke(this.index);
+		}
+		btns[i].onmouseout = function() {
+			_this.start();
+		}
+	}
+	this.invoke(0);
+}
+
+Player.prototype = {
+	constructor : Player,
+	start : function() {
+		var _this = this;
+		this.stop();
+		this.intervalId = setInterval(function() {
+			_this.next();
+		}, this.timeout);
+	},
+	stop: function() {
+		clearInterval(this.intervalId);
+	},
+	invoke: function(n) {
+		this.pointer = n;
+		if(this.pointer >= this.btns.length) {
+			this.pointer = 0;
+		}
+		this.clearHover();
+		this.btns[this.pointer].className = this.hoverClass;
+		//this.scrollContent.style.top = parseInt(-this.imgHeight * this.pointer) + 'px';
+		var startVal = parseInt(this.scrollContent.style.top) || 0;
+		var alterVal = (parseInt(-startVal - this.imgHeight * this.pointer));
+		this.animateIterval && this.animateIterval();//修正快速切换时闪动
+		this.animateIterval=animate(this.scrollContent, {top : startVal},{top : alterVal}, 1200, Tween.Quad.easeOut);
+		//这里默认设置每张图滚动的总时间是1s
+	},
+	next: function() {
+		this.invoke(this.pointer + 1);
+	},
+	clearHover: function() {
+		for(var i=0; i<this.btns.length; i++) {
+			this.btns[i].className = '';
+		};
+	}
+}
+
+window.onload = function() {
+	var btns = getByClass('btns', $('slider'))[0].getElementsByTagName('li');
+	var player = getByClass('player', $('slider'))[0];
+	var player = new Player(btns, player, 618,3000, undefined);
+	player.start();
+	//player.invoke(2);
+}
+

@@ -16,8 +16,13 @@ admin.site.register(Publisher)
 admin.site.register(Author,AuthorAdmin)
 admin.site.register(Book,BookAdmin)
 """
-
-admin.site.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('title', 'content', 'name')
+    list_filter = ('name','title')
+    ordering = ('date_created',)
+    fields = ('title', 'content', 'name', 'obj')
+  
+admin.site.register(Comment,CommentAdmin)
 admin.site.register(Post)
 
 

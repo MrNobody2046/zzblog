@@ -18,7 +18,7 @@
   {% for image in imagelist %}
 
 
-  <li><a href="/blog" ><img src="{{ image }}" alt="{{image}}" heigth="618" wide="1000 "/></a></li>
+  <li><a href="/blog" ><img src="{{ image }}" alt="{{image}}"/></a></li>
   {% endfor %}          
 
   </ol>

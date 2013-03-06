@@ -27,12 +27,17 @@ def custom_pro(request):
     archive_data = create_archive_data(posts)
     form = commentForm()
     user = request.user
+    f = open("/home/zxc/www/pyz/medias/w.txt","r").readlines()
+    shuffle(f)
+    words = f[23]
+    
     return {   'version': '1.0',
              'post_list': posts,
             'tag_counts': tag_data,
             'archive_counts': archive_data,
                  'form':form,
                  'user':user,
+                 'words':words
             }
             
 
@@ -61,7 +66,7 @@ def index(request):
     c = Context({'imagelist': filelist})
     html = t.render(c)
 #    return HttpResponse(html)
-    return render_to_response('index',pagedata)
+    return render_to_response('newindex',pagedata)
 
  
 def login(request):
@@ -75,7 +80,7 @@ def login(request):
         if user is not None and user.is_active:
             auth.login(request, user)
             pagedata.update({'user':user})
-            return HttpResponseRedirect("/blog",)
+            return HttpResponseRedirect("/admin",)
         else:
             return HttpResponse("Your username and password didn't match.")
             
@@ -103,7 +108,7 @@ def register(request):
 def frontpage(request):
     pagedata = RequestContext(request)
     pagedata.update({'subtitle': '',})
-    return render_to_response('list-all',pagedata)
+    return render_to_response('NewBase.html',pagedata)
     
 
 from django.contrib.auth.decorators import login_required
@@ -138,7 +143,7 @@ def yearview(request, year):
     posts = pagedata['post_list']
     posts = posts.filter(date_created__year=year)
     pagedata.update({'post_list': posts,'subtitle': 'Posts for %s' % year})
-    return render_to_response('list-page', pagedata)
+    return render_to_response('NewBase.html', pagedata)
 
 
 
@@ -157,7 +162,7 @@ def monthview(request, year, month):
     posts = posts.filter(date_created__month=int(month))
     pagedata.update({'post_list': posts,
                      'subtitle': 'Posts for %s %s' % (MONTH_NAMES[int(month)], year),})
-    return render_to_response('list-page', pagedata)
+    return render_to_response('NewBase.html', pagedata)
 
 def tagview(request, tag):
     pagedata = RequestContext(request)
@@ -169,7 +174,7 @@ def tagview(request, tag):
             posts.append(post)
     pagedata.update({'post_list': posts,
                      'subtitle': "Posts tagged '%s'" % tag,})
-    return render_to_response('list-page', pagedata)
+    return render_to_response('NewBase.html', pagedata)
 
 
 
@@ -179,7 +184,7 @@ def search(request):
     keywords = request.POST['keyword']
     posts = Post.objects.filter(content__icontains=keywords)
     pagedata.update({'post_list': posts})
-    return render_to_response('list-page', pagedata)
+    return render_to_response('NewBase.html', pagedata)
         
 def init():
     posts = Post.objects.all()

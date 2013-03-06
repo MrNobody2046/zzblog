@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pyz‘space</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/statics/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/statics/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<style>
+body {
+    background-color: pink;
+    }
+</style>
+
+</head>
+<body
+
+
+<div class="container">
+<div class="page-header">
+	<h1>Pyz'space<small> 【心灵需要一个栖息到地方】   </small></h1>
+</div>
+
+    <div id="myCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+    {% for image in imagelist %}
+    {% ifequal forloop.counter 1 %}    
+    <div class="active item"><a href="/blog" ><img src="{{ image }}" alt="{{image}}"/></a></div>
+    {% else %}
+    <div class="item"><a href="/blog" ><img src="{{ image }}" alt="{{image}}"/></a></div>
+    {% endifequal %}
+    {% endfor %}
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+	
+  
+
+</div>
+<script src="/statics/js/jquery.js"></script>
+<script src="/statics/js/bootstrap.min.js"></script>
+<div class="footer">
+        <strong>         本博客内相片如非注明皆为原创，转载需要获得博主书面认可，请电邮<a href="mailto:philorpove@foxmail.com">philorpove@foxmail.com </a></strong>
+    </div>
+</body>
+</html>
